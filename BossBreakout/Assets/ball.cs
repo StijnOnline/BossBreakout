@@ -4,15 +4,22 @@ using UnityEngine;
 
 public class ball : MonoBehaviour
 {
-    // Start is called before the first frame update
+    public Vector2 minMaxSpeed = new Vector2(5f,100f);
+    public bool playerHit = true;
+
+    private Rigidbody2D rb;
+
     void Start()
     {
-        GetComponent<Rigidbody2D>().velocity = new Vector2(5, 5);
+        rb = GetComponent<Rigidbody2D>();
+        rb.velocity = new Vector2(minMaxSpeed.x, minMaxSpeed.x);
     }
 
     // Update is called once per frame
     void Update()
     {
+            GetComponent<Renderer>().material.color = playerHit ? Color.blue : Color.red;
         
+        rb.velocity = rb.velocity.normalized * Mathf.Min(minMaxSpeed.y, Mathf.Max(minMaxSpeed.x, rb.velocity.magnitude));
     }
 }

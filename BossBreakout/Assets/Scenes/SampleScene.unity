@@ -766,6 +766,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   movespeed: 0.05
+  hitTime: 0.5
   hitMultiplier: 2
   minMaxPos: {x: -3.6, y: 3.6}
 --- !u!61 &1287639423
@@ -812,6 +813,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 19bdf715a2c46804a8155015240de3e0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  minMaxSpeed: {x: 5, y: 100}
+  playerHit: 0
 --- !u!1001 &5945367421958739780
 PrefabInstance:
   m_ObjectHideFlags: 0
