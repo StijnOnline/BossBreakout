@@ -2,24 +2,48 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ball : MonoBehaviour
+public class Ball : MonoBehaviour
 {
+    public static Ball activeBall;
+
     public Vector2 minMaxSpeed = new Vector2(5f,100f);
     public bool playerHit = true;
 
-    private Rigidbody2D rb;
+    public Rigidbody2D rb;
+    private Renderer r;
+
+    public Type type;
+
+    public enum Type {
+        Normal,
+        Spiked,
+        Curve
+    }
+
+    //TMEP
+    public GameObject spikes;
 
     void Start()
     {
+        activeBall = this;
+
         rb = GetComponent<Rigidbody2D>();
+        r = GetComponent<Renderer>();
         rb.velocity = new Vector2(minMaxSpeed.x, minMaxSpeed.x);
     }
 
-    // Update is called once per frame
-    void Update()
+
+    void FixedUpdate()
     {
-            GetComponent<Renderer>().material.color = playerHit ? Color.blue : Color.red;
+        r.material.color = playerHit ? Color.blue : Color.red;
+        rb.velocity = rb.velocity.normalized * Mathf.Clamp(rb.velocity.magnitude, 0, minMaxSpeed.y);
+
         
-        rb.velocity = rb.velocity.normalized * Mathf.Min(minMaxSpeed.y, Mathf.Max(minMaxSpeed.x, rb.velocity.magnitude));
+        if(type == Type.Spiked) {
+            spikes.SetActive(true);
+            //spikes.transform.Rotate(new Vector3(0,0,3),Space.Self);
+        }
     }
+
+    
 }

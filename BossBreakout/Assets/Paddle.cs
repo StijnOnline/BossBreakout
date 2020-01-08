@@ -2,8 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Paddle : MonoBehaviour
-{
+public class Paddle : MonoBehaviour {
 
     public float movespeed = 0.05f;
 
@@ -13,54 +12,51 @@ public class Paddle : MonoBehaviour
 
     public Vector2 minMaxPos;
 
+    private Renderer r;
 
-    void Start()
-    {
-        
+    float input_hor;
+
+    void Start() {
+        //TODO remove temp:
+        r = GetComponent<Renderer>();
+    }
+
+    void Update() {
+        input_hor = Input.GetAxisRaw("Horizontal");
+
+        if(Input.GetKeyDown(KeyCode.Z)) {
+            hitTimer = Time.time;
+        }
     }
 
     //TODO dash
-    void Update()
-    {
-        float input_hor = Input.GetAxisRaw("Horizontal");
-        if (Input.GetKeyDown(KeyCode.Z))
-        {
-            hitTimer = Time.time;
-        }
-
-
-        if (hitTimer + hitTime > Time.time)
-        {
+    void FixedUpdate() {
+        if(hitTimer + hitTime > Time.time) {
             //TODO remove temp:
-            GetComponent<Renderer>().material.color = Color.blue;
-        }
-        else
-        {
+            r.material.color = Color.blue;
+        } else {
             //TODO remove temp:
-            GetComponent<Renderer>().material.color = Color.white;
+            r.material.color = Color.white;
         }
 
         Vector3 newpos = transform.position;
-        newpos.x = Mathf.Max(Mathf.Min(minMaxPos.y, newpos.x + input_hor * movespeed),minMaxPos.x);
+        newpos.x = Mathf.Max(Mathf.Min(minMaxPos.y, newpos.x + input_hor * movespeed), minMaxPos.x);
         transform.position = newpos;
     }
 
-    private void OnCollisionEnter2D(Collision2D collision)
-    {
+    private void OnCollisionEnter2D(Collision2D collision) {
         GameObject go = collision.gameObject;
-        if (go.layer == LayerMask.NameToLayer("Ball"))
-        {
+        if(go.layer == LayerMask.NameToLayer("Ball")) {
             Rigidbody2D rb = go.GetComponent<Rigidbody2D>();
+            Ball b = go.GetComponent<Ball>();
             rb.velocity = (rb.velocity.magnitude * (transform.position - go.transform.position) * -1f);
-            if (hitTimer + hitTime > Time.time)
-            {
-                go.GetComponent<ball>().playerHit = true;
+            if(hitTimer + hitTime > Time.time) {
+                b.playerHit = true;
                 rb.velocity = rb.velocity * hitMultiplier;
-            }else if( !go.GetComponent<ball>().playerHit)
-            {
+            } else if(!b.playerHit) {
                 //TODO remove temp:
-                GetComponent<Renderer>().material.color = Color.red;
-                rb.velocity = rb.velocity.normalized * go.GetComponent<ball>().minMaxSpeed.x;
+                r.material.color = Color.red;
+                rb.velocity = rb.velocity.normalized * b.minMaxSpeed.x;
             }
         }
     }
