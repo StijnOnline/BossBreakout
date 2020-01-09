@@ -13,6 +13,7 @@ public class Ball : MonoBehaviour
     private Renderer r;
 
     public Type type;
+    public float curveforce = 5f;
 
     public enum Type {
         Normal,
@@ -38,10 +39,10 @@ public class Ball : MonoBehaviour
         r.material.color = playerHit ? Color.blue : Color.red;
         rb.velocity = rb.velocity.normalized * Mathf.Clamp(rb.velocity.magnitude, 0, minMaxSpeed.y);
 
-        
-        if(type == Type.Spiked) {
-            spikes.SetActive(true);
-            //spikes.transform.Rotate(new Vector3(0,0,3),Space.Self);
+        spikes.SetActive(type == Type.Spiked);
+
+        if(type == Type.Curve) {
+            rb.AddForce( -curveforce *   new Vector2(transform.position.x, 0),ForceMode2D.Impulse);
         }
     }
 
