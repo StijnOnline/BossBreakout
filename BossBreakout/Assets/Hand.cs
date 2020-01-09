@@ -54,22 +54,26 @@ public class Hand : MonoBehaviour {
 
             currentballspeed = rb.velocity.magnitude;
 
-            rb.velocity = Vector2.zero;
-            grabbed = true;
-            Ball.activeBall.playerHit = false;
+            if(currentballspeed != b.minMaxSpeed.y) {
 
-            int type = Random.Range(0, 3);
-            Ball.activeBall.type = (Ball.Type)type;
-            throwdir = Random.Range(0, 3);
-            waitTimer = Time.time;
+                rb.velocity = Vector2.zero;
+                grabbed = true;
+                Ball.activeBall.playerHit = false;
 
-            ThrowIndicator.activeIndicator.SetIndicator(throwdir, type);
+                int type = Random.Range(0, 3);
+                Ball.activeBall.type = (Ball.Type)type;
+                throwdir = Random.Range(0, 3);
+                waitTimer = Time.time;
+
+                ThrowIndicator.activeIndicator.SetIndicator(throwdir, type);
 
 
 
-            Ball.activeBall.transform.position = transform.position - new Vector3(0, 0.5f);
-            Ball.activeBall.rb.simulated = false;
-
+                Ball.activeBall.transform.position = transform.position - new Vector3(0, 0.5f);
+                Ball.activeBall.rb.simulated = false;
+            } else {
+                gameObject.SetActive(false);
+            }
         }
     }
 }

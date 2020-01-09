@@ -50,7 +50,10 @@ public class Paddle : MonoBehaviour {
             Rigidbody2D rb = go.GetComponent<Rigidbody2D>();
             Ball b = go.GetComponent<Ball>();
             rb.velocity = (rb.velocity.magnitude * (transform.position - go.transform.position) * -1f);
-            if(hitTimer + hitTime > Time.time) {
+            
+            
+            
+            if(hitTimer + hitTime > Time.time && b.type != Ball.Type.Spiked) {
                 b.playerHit = true;
                 rb.velocity = rb.velocity * hitMultiplier;
             } else if(!b.playerHit) {
@@ -58,6 +61,8 @@ public class Paddle : MonoBehaviour {
                 r.material.color = Color.red;
                 rb.velocity = rb.velocity.normalized * b.minMaxSpeed.x;
             }
+
+
         }
     }
 
