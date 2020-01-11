@@ -24,7 +24,7 @@ public class ThrowIndicator : MonoBehaviour
         }
         switch(type) {
             case 0: txt += "Normal "; break;
-            case 1: txt += "Spiked "; break;
+            case 1: txt += "Heal "; break;
             case 2: txt += "Curved "; break;
         }
         text.SetText(txt);

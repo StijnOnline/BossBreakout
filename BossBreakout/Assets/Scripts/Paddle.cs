@@ -5,9 +5,6 @@ using UnityEngine;
 public class Paddle : MonoBehaviour {
 
     public float movespeed = 0.05f;
-
-    public float hitTime = 0.5f;
-    private float hitTimer = 0;
     public float hitMultiplier = 1.5f;
 
     public Vector2 minMaxPos;
@@ -23,21 +20,10 @@ public class Paddle : MonoBehaviour {
 
     void Update() {
         input_hor = Input.GetAxisRaw("Horizontal");
-
-        if(Input.GetKeyDown(KeyCode.Z)) {
-            hitTimer = Time.time;
-        }
     }
 
     //TODO dash
     void FixedUpdate() {
-        if(hitTimer + hitTime > Time.time) {
-            //TODO remove temp:
-            r.material.color = Color.blue;
-        } else {
-            //TODO remove temp:
-            r.material.color = Color.white;
-        }
 
         Vector3 newpos = transform.position;
         newpos.x = Mathf.Max(Mathf.Min(minMaxPos.y, newpos.x + input_hor * movespeed), minMaxPos.x);
@@ -53,12 +39,10 @@ public class Paddle : MonoBehaviour {
             
             
             
-            if(hitTimer + hitTime > Time.time && b.type != Ball.Type.Spiked) {
+            if(b.type != Ball.Type.Heal) {
                 b.playerHit = true;
                 rb.velocity = rb.velocity * hitMultiplier;
             } else if(!b.playerHit) {
-                //TODO remove temp:
-                r.material.color = Color.red;
                 rb.velocity = rb.velocity.normalized * b.minMaxSpeed.x;
             }
 

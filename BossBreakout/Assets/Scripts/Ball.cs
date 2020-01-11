@@ -17,7 +17,7 @@ public class Ball : MonoBehaviour
 
     public enum Type {
         Normal,
-        Spiked,
+        Heal,
         Curve
     }
 
@@ -39,7 +39,7 @@ public class Ball : MonoBehaviour
         r.material.color = playerHit ? Color.blue : Color.red;
         rb.velocity = rb.velocity.normalized * Mathf.Clamp(rb.velocity.magnitude, 0, minMaxSpeed.y);
 
-        spikes.SetActive(type == Type.Spiked);
+        spikes.SetActive(type == Type.Heal);
 
         if(type == Type.Curve) {
             rb.AddForce( -curveforce *   new Vector2(transform.position.x, 0),ForceMode2D.Impulse);
