@@ -4,7 +4,8 @@ using UnityEngine;
 
 public class Paddle : MonoBehaviour {
 
-    public float movespeed = 0.05f;
+    public float movespeed = 0.2f;
+    public float dashDist = 0.5f;
     public float hitMultiplier = 1.5f;
 
     public Vector2 minMaxPos;
@@ -12,6 +13,7 @@ public class Paddle : MonoBehaviour {
     private Renderer r;
 
     float input_hor;
+    bool input_dash;
 
     public bool grabbed = false;
     public float pauseTime = 0.1f;
@@ -25,6 +27,7 @@ public class Paddle : MonoBehaviour {
 
     void Update() {
         input_hor = Input.GetAxisRaw("Horizontal");
+        input_dash = Input.GetKeyDown(KeyCode.Space) || Input.GetKeyDown(KeyCode.LeftShift) || Input.GetKeyDown(KeyCode.RightShift) || Input.GetKeyDown(KeyCode.LeftControl) || Input.GetKeyDown(KeyCode.RightControl);
     }
 
     //TODO dash
@@ -39,8 +42,8 @@ public class Paddle : MonoBehaviour {
             }
         }
 
-                Vector3 newpos = transform.position;
-        newpos.x = Mathf.Max(Mathf.Min(minMaxPos.y, newpos.x + input_hor * movespeed), minMaxPos.x);
+        Vector3 newpos = transform.position;
+        newpos.x = Mathf.Max(Mathf.Min(minMaxPos.y, newpos.x + input_hor * (input_dash ? dashDist : movespeed)), minMaxPos.x);
         transform.position = newpos;
     }
 

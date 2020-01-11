@@ -6831,8 +6831,8 @@ GameObject:
   m_Component:
   - component: {fileID: 1287639421}
   - component: {fileID: 1287639420}
-  - component: {fileID: 1287639422}
   - component: {fileID: 1287639423}
+  - component: {fileID: 1287639422}
   m_Layer: 0
   m_Name: Paddle
   m_TagString: Untagged
@@ -6918,6 +6918,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   movespeed: 0.2
+  dashDist: 0.5
   hitMultiplier: 1.6
   minMaxPos: {x: -4.5, y: 4.5}
   grabbed: 0
