@@ -8,29 +8,34 @@ public class Boss : MonoBehaviour {
     public Hand hand2;
     public Block[] blocks;
 
+    public int stage = 0;
+
 
 
     void Start() {
         activeBoss = this;
+        ResetBlocks();
     }
 
-    // Update is called once per frame
-    void Update() {
 
-    }
 
     public void LostBlock() {
-
+        Debug.Log("OOF LOST A BLOCK");
     }
 
-    public void LostTube() {
+    public void LostTube(bool leftside) {
+        Debug.Log("OOF LOST A 'Tube");
+        if(leftside) { hand1.gameObject.SetActive(true); } else { hand2.gameObject.SetActive(true); }
+
+        stage++;
         ResetBlocks();
     }
 
     private void ResetBlocks() {
         foreach(Block b in blocks) {
-            bool r = Random.value > 0.5f;
+            bool r = Random.value > 0.35f + (stage * 0.65f / 4f);
             b.gameObject.SetActive(r);
+
         }
     }
 }
