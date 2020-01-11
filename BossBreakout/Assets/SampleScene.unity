@@ -265,6 +265,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   startHP: 2
   currentHP: 0
+  invurnerable: 0
 --- !u!1001 &17198601
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -495,6 +496,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   startHP: 2
   currentHP: 0
+  invurnerable: 0
 --- !u!1 &71271979
 GameObject:
   m_ObjectHideFlags: 0
@@ -791,6 +793,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   startHP: 2
   currentHP: 0
+  invurnerable: 0
 --- !u!1 &140478593
 GameObject:
   m_ObjectHideFlags: 0
@@ -935,6 +938,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   startHP: 2
   currentHP: 0
+  invurnerable: 0
 --- !u!1 &148259841
 GameObject:
   m_ObjectHideFlags: 0
@@ -998,7 +1002,7 @@ Transform:
   - {fileID: 707815097}
   - {fileID: 1127492890}
   m_Father: {fileID: 0}
-  m_RootOrder: 10
+  m_RootOrder: 9
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &149735442
 PrefabInstance:
@@ -1422,6 +1426,7 @@ GameObject:
   m_Component:
   - component: {fileID: 241428709}
   - component: {fileID: 241428710}
+  - component: {fileID: 241428711}
   m_Layer: 0
   m_Name: BOSS
   m_TagString: Untagged
@@ -1440,6 +1445,7 @@ Transform:
   m_LocalPosition: {x: 0, y: 4, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
+  - {fileID: 933982227}
   - {fileID: 269471585}
   - {fileID: 2005803337}
   - {fileID: 594569684}
@@ -1459,9 +1465,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 011e1872af1a2cf48ada6926b796360b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  startHP: 5
+  currentHP: 0
+  invurnerable: 1
+  startRandomTiles: 0
   hand1: {fileID: 269471586}
   hand2: {fileID: 2005803338}
-  forceField: {fileID: 0}
+  forceField: {fileID: 291646118}
   blocks:
   - {fileID: 1165960791}
   - {fileID: 1423317129}
@@ -1501,6 +1511,32 @@ MonoBehaviour:
   stage: 0
   handMoveDist: 1
   handRespawnTime: 5
+--- !u!61 &241428711
+BoxCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 241428708}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0, y: 0}
+    oldSize: {x: 0, y: 0}
+    newSize: {x: 0, y: 0}
+    adaptiveTilingThreshold: 0
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  serializedVersion: 2
+  m_Size: {x: 3, y: 3}
+  m_EdgeRadius: 0
 --- !u!1001 &247907874
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1786,7 +1822,7 @@ Transform:
   m_LocalScale: {x: 0.8, y: 0.2, z: 1}
   m_Children: []
   m_Father: {fileID: 241428709}
-  m_RootOrder: 0
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &269471586
 MonoBehaviour:
@@ -2085,7 +2121,7 @@ Transform:
   m_LocalScale: {x: 1.05, y: 1.05, z: 1.05}
   m_Children: []
   m_Father: {fileID: 241428709}
-  m_RootOrder: 3
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!95 &291646120
 Animator:
@@ -2301,6 +2337,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   startHP: 2
   currentHP: 0
+  invurnerable: 0
 --- !u!1 &368896837
 GameObject:
   m_ObjectHideFlags: 0
@@ -2445,6 +2482,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   startHP: 2
   currentHP: 0
+  invurnerable: 0
 --- !u!1 &386576102
 GameObject:
   m_ObjectHideFlags: 0
@@ -2589,6 +2627,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   startHP: 2
   currentHP: 0
+  invurnerable: 0
 --- !u!1 &394977345
 GameObject:
   m_ObjectHideFlags: 0
@@ -2626,7 +2665,7 @@ Transform:
   - {fileID: 1485478356}
   - {fileID: 1241544609}
   m_Father: {fileID: 0}
-  m_RootOrder: 9
+  m_RootOrder: 8
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &394977347
 MonoBehaviour:
@@ -2675,7 +2714,7 @@ Transform:
   - {fileID: 903758067}
   - {fileID: 410892974}
   m_Father: {fileID: 0}
-  m_RootOrder: 6
+  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &399553233
 MonoBehaviour:
@@ -2835,6 +2874,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   startHP: 2
   currentHP: 0
+  invurnerable: 0
 --- !u!1 &412297830
 GameObject:
   m_ObjectHideFlags: 0
@@ -3602,7 +3642,7 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 241428709}
-  m_RootOrder: 2
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -4350,6 +4390,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   startHP: 1
   currentHP: 0
+  invurnerable: 0
 --- !u!1 &707815094
 GameObject:
   m_ObjectHideFlags: 0
@@ -4494,6 +4535,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   startHP: 1
   currentHP: 0
+  invurnerable: 0
 --- !u!1001 &716512990
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -5158,6 +5200,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   startHP: 2
   currentHP: 0
+  invurnerable: 0
 --- !u!1 &905959079
 GameObject:
   m_ObjectHideFlags: 0
@@ -5302,6 +5345,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   startHP: 2
   currentHP: 0
+  invurnerable: 0
 --- !u!1001 &925932914
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -5463,12 +5507,12 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 933982225}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 4, z: 0}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
-  m_Father: {fileID: 0}
-  m_RootOrder: 5
+  m_Father: {fileID: 241428709}
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &938176205 stripped
 GameObject:
@@ -5835,7 +5879,7 @@ Transform:
   - {fileID: 1537706474}
   - {fileID: 1970051670}
   m_Father: {fileID: 0}
-  m_RootOrder: 7
+  m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1108855258
 MonoBehaviour:
@@ -5995,6 +6039,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   startHP: 1
   currentHP: 0
+  invurnerable: 0
 --- !u!1 &1143161329 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 1255900063439993262, guid: 468e57c3bd62cf94aaa1e9b36d3e8333,
@@ -6271,6 +6316,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   startHP: 2
   currentHP: 0
+  invurnerable: 0
 --- !u!1 &1241544608
 GameObject:
   m_ObjectHideFlags: 0
@@ -6415,6 +6461,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   startHP: 2
   currentHP: 0
+  invurnerable: 0
 --- !u!1001 &1249543876
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -6645,6 +6692,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   startHP: 2
   currentHP: 0
+  invurnerable: 0
 --- !u!1 &1257159124 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 1255900063439993262, guid: 468e57c3bd62cf94aaa1e9b36d3e8333,
@@ -6977,7 +7025,7 @@ Transform:
   - {fileID: 4544521}
   - {fileID: 138446365}
   m_Father: {fileID: 0}
-  m_RootOrder: 8
+  m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1311197766
 MonoBehaviour:
@@ -7223,6 +7271,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   startHP: 2
   currentHP: 0
+  invurnerable: 0
 --- !u!1 &1423317127 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 1255900063439993262, guid: 468e57c3bd62cf94aaa1e9b36d3e8333,
@@ -7671,6 +7720,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   startHP: 2
   currentHP: 0
+  invurnerable: 0
 --- !u!1001 &1495199186
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -7987,6 +8037,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   startHP: 2
   currentHP: 0
+  invurnerable: 0
 --- !u!1 &1541271870 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 1255900063439993262, guid: 468e57c3bd62cf94aaa1e9b36d3e8333,
@@ -8175,6 +8226,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   startHP: 2
   currentHP: 0
+  invurnerable: 0
 --- !u!1 &1635364423
 GameObject:
   m_ObjectHideFlags: 0
@@ -8319,6 +8371,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   startHP: 2
   currentHP: 0
+  invurnerable: 0
 --- !u!1001 &1654372911
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -8811,6 +8864,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   startHP: 2
   currentHP: 0
+  invurnerable: 0
 --- !u!1001 &1778629733
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -9041,6 +9095,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   startHP: 2
   currentHP: 0
+  invurnerable: 0
 --- !u!1001 &1797997047
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -9445,6 +9500,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   startHP: 2
   currentHP: 0
+  invurnerable: 0
 --- !u!1 &2005803336
 GameObject:
   m_ObjectHideFlags: 0
@@ -9476,7 +9532,7 @@ Transform:
   m_LocalScale: {x: 0.8, y: 0.2, z: 1}
   m_Children: []
   m_Father: {fileID: 241428709}
-  m_RootOrder: 1
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &2005803338
 MonoBehaviour:
@@ -9819,6 +9875,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   startHP: 2
   currentHP: 0
+  invurnerable: 0
 --- !u!1 &2111957366 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 136854790147070055, guid: e600533acac9f3a478d6a018cea8252c,

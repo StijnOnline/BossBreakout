@@ -2,10 +2,12 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Boss : MonoBehaviour {
+public class Boss : Block {
+
+
 
     public static Boss activeBoss;
-
+    public bool startRandomTiles = false;
 
     public Hand hand1;
     public Hand hand2;
@@ -23,7 +25,9 @@ public class Boss : MonoBehaviour {
 
     void Start() {
         activeBoss = this;
-        ResetBlocks();
+        invurnerable = true;
+        if(startRandomTiles) ResetBlocks();
+        forceField.SetActive(true);
     }
 
     public void Update() {
@@ -48,6 +52,7 @@ public class Boss : MonoBehaviour {
                 //hand2.waitTimer = Time.time;
             }
         }
+        
     }
 
 
@@ -78,15 +83,24 @@ public class Boss : MonoBehaviour {
             hand2.transform.Translate(new Vector3(0, -handMoveDist));
         }
 
+        if(stage == 4) {
+            invurnerable = false;
+            forceField.SetActive(false);
+        }
 
         ResetBlocks();
     }
 
-    private void ResetBlocks() {
+    public void ResetBlocks() {
         foreach(Block b in blocks) {
             bool r = Random.value > 0.35f + (stage * 0.65f / 4f);
             b.gameObject.SetActive(r);
 
         }
+    }
+
+    public override void Destroyed() {
+        gameObject.SetActive(false);
+
     }
 }
