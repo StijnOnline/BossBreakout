@@ -6918,7 +6918,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   movespeed: 0.2
-  dashDist: 0.5
+  dashDist: 3
   hitMultiplier: 1.6
   minMaxPos: {x: -4.5, y: 4.5}
   grabbed: 0
