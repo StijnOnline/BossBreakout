@@ -42,7 +42,9 @@ public class Ball : MonoBehaviour
         spikes.SetActive(type == Type.Heal);
 
         if(type == Type.Curve) {
-            rb.AddForce( -curveforce *   new Vector2(transform.position.x, 0),ForceMode2D.Impulse);
+            //rb.AddForce( -curveforce *   new Vector2(transform.position.x, 0),ForceMode2D.Impulse);
+            Vector2 dir = rb.velocity.normalized + curveforce /1000 *  new Vector2(-rb.velocity.y,rb.velocity.x);
+            rb.velocity  =  rb.velocity.magnitude * dir.normalized;
         }
     }
 

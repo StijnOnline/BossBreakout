@@ -3,9 +3,13 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class Boss : MonoBehaviour {
+
     public static Boss activeBoss;
+    
+    
     public Hand hand1;
     public Hand hand2;
+    public GameObject forceField;
     public Block[] blocks;
 
     public int stage = 0;

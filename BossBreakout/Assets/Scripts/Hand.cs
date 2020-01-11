@@ -61,6 +61,8 @@ public class Hand : MonoBehaviour {
                 Ball.activeBall.playerHit = false;
 
                 int type = Random.Range(0, 3);
+                //int type = 2;
+
                 Ball.activeBall.type = (Ball.Type)type;
                 throwdir = Random.Range(0, 3);
                 waitTimer = Time.time;
@@ -72,6 +74,9 @@ public class Hand : MonoBehaviour {
                 Ball.activeBall.transform.position = transform.position - new Vector3(0, 0.5f);
                 Ball.activeBall.rb.simulated = false;
             } else {
+                Ball.activeBall.type = Ball.Type.Normal;
+
+
                 gameObject.SetActive(false);
             }
         }
