@@ -8,12 +8,13 @@ public class Hand : MonoBehaviour {
     private float currentInput;
     public Vector2 minMaxPos;
 
-    private float waitTimer = -10f;
+    [HideInInspector] public float waitTimer = -10f;
     public float waitTime = 2f;
-    private bool grabbed = false;
+    [HideInInspector] public bool grabbed = false;
     private int throwdir;
     private float currentballspeed;
     public float speedMultiplier = 2f;
+    public bool leftside;
 
     void Start() {
 
@@ -56,14 +57,12 @@ public class Hand : MonoBehaviour {
 
             if(currentballspeed != b.minMaxSpeed.y) {
 
-                rb.velocity = Vector2.zero;
                 grabbed = true;
                 Ball.activeBall.playerHit = false;
 
-                int type = Random.Range(0, 3);
+                int type = Random.Range(0, 4);
                 //int type = 2;
-
-                Ball.activeBall.type = (Ball.Type)type;
+                Ball.activeBall.type = (Ball.Type)(type%3);
                 throwdir = Random.Range(0, 3);
                 waitTimer = Time.time;
 
@@ -76,8 +75,7 @@ public class Hand : MonoBehaviour {
             } else {
                 Ball.activeBall.type = Ball.Type.Normal;
 
-
-                gameObject.SetActive(false);
+                Boss.activeBoss.DeactivateHand(leftside);
             }
         }
     }

@@ -1500,6 +1500,7 @@ MonoBehaviour:
   - {fileID: 1127492892}
   stage: 0
   handMoveDist: 1
+  handRespawnTime: 5
 --- !u!1001 &247907874
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1801,8 +1802,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   movespeed: 0.3
   minMaxPos: {x: -5.25, y: -0.5}
+  waitTimer: -10
   waitTime: 2
+  grabbed: 0
   speedMultiplier: 1
+  leftside: 1
 --- !u!61 &269471587
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -9487,8 +9491,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   movespeed: 0.3
   minMaxPos: {x: 0.5, y: 5.25}
+  waitTimer: -10
   waitTime: 2
+  grabbed: 0
   speedMultiplier: 1
+  leftside: 0
 --- !u!61 &2005803339
 BoxCollider2D:
   m_ObjectHideFlags: 0

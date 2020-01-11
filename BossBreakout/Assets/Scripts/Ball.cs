@@ -37,7 +37,7 @@ public class Ball : MonoBehaviour
     void FixedUpdate()
     {
         r.material.color = playerHit ? Color.blue : Color.red;
-        rb.velocity = rb.velocity.normalized * Mathf.Clamp(rb.velocity.magnitude, 0, minMaxSpeed.y);
+        rb.velocity = rb.velocity.normalized * Mathf.Clamp(rb.velocity.magnitude, minMaxSpeed.x, minMaxSpeed.y);
 
         spikes.SetActive(type == Type.Heal);
 
