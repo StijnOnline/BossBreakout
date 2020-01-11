@@ -15,6 +15,7 @@ public class Hand : MonoBehaviour {
     private float currentballspeed;
     public float speedMultiplier = 2f;
     public bool leftside;
+    public Vector3 grabpos = new Vector3(0,-0.5f);
 
     void Start() {
 
@@ -70,7 +71,7 @@ public class Hand : MonoBehaviour {
 
 
 
-                Ball.activeBall.transform.position = transform.position - new Vector3(0, 0.5f);
+                Ball.activeBall.transform.position = transform.position - grabpos;
                 Ball.activeBall.rb.simulated = false;
             } else {
                 Ball.activeBall.type = Ball.Type.Normal;
