@@ -13,6 +13,7 @@ public class Boss : MonoBehaviour {
     public Block[] blocks;
 
     public int stage = 0;
+    public float handMoveDist = 1f;
 
 
 
@@ -28,10 +29,18 @@ public class Boss : MonoBehaviour {
     }
 
     public void LostTube(bool leftside) {
-        Debug.Log("OOF LOST A 'Tube");
-        if(leftside) { hand1.gameObject.SetActive(true); } else { hand2.gameObject.SetActive(true); }
-
         stage++;
+
+        Debug.Log("OOF LOST A 'Tube");
+        if(leftside) { 
+            hand1.gameObject.SetActive(true);
+            hand1.transform.Translate(new Vector3(0,-handMoveDist));
+        } else { 
+            hand2.gameObject.SetActive(true);
+            hand2.transform.Translate(new Vector3(0, -handMoveDist));
+        }
+
+        
         ResetBlocks();
     }
 

@@ -1499,6 +1499,7 @@ MonoBehaviour:
   - {fileID: 707815099}
   - {fileID: 1127492892}
   stage: 0
+  handMoveDist: 1
 --- !u!1001 &247907874
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -3114,9 +3115,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c0e9f62a3dd93d147a62f6cf36543d3b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  shakeTime: 1
-  baseShakeSpeed: 50
-  shakeDistance: 0.2
+  shakeTime: 0.005
+  baseShakeSpeed: 2
+  shakeDistance: 0.02
 --- !u!20 &519420031
 Camera:
   m_ObjectHideFlags: 0
@@ -6915,6 +6916,8 @@ MonoBehaviour:
   movespeed: 0.2
   hitMultiplier: 1.6
   minMaxPos: {x: -4.5, y: 4.5}
+  grabbed: 0
+  pauseTime: 0.1
 --- !u!68 &1287639423
 EdgeCollider2D:
   m_ObjectHideFlags: 0

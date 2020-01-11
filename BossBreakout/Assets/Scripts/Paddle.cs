@@ -13,6 +13,11 @@ public class Paddle : MonoBehaviour {
 
     float input_hor;
 
+    public bool grabbed = false;
+    public float pauseTime = 0.1f;
+    private float pauseTimer = -1f;
+    private Vector2 throwspeed;
+
     void Start() {
         //TODO remove temp:
         r = GetComponent<Renderer>();
@@ -25,7 +30,16 @@ public class Paddle : MonoBehaviour {
     //TODO dash
     void FixedUpdate() {
 
-        Vector3 newpos = transform.position;
+        if(grabbed) {
+            if( Time.time > pauseTimer + pauseTime) {
+                Ball.activeBall.rb.simulated = true;
+                Ball.activeBall.rb.velocity = throwspeed;
+                grabbed = false;
+                Camera.main.GetComponent<ScreenShake>().Shake(throwspeed.magnitude);
+            }
+        }
+
+                Vector3 newpos = transform.position;
         newpos.x = Mathf.Max(Mathf.Min(minMaxPos.y, newpos.x + input_hor * movespeed), minMaxPos.x);
         transform.position = newpos;
     }
@@ -41,10 +55,18 @@ public class Paddle : MonoBehaviour {
             
             if(b.type != Ball.Type.Heal) {
                 b.playerHit = true;
-                rb.velocity = rb.velocity * hitMultiplier;
-            } else if(!b.playerHit) {
-                rb.velocity = rb.velocity.normalized * b.minMaxSpeed.x;
             }
+
+
+
+            throwspeed = rb.velocity * hitMultiplier;
+
+            Ball.activeBall.rb.simulated = false;
+            pauseTimer = Time.time;
+            grabbed = true;
+            //else if(!b.playerHit) {
+            //    rb.velocity = rb.velocity.normalized * b.minMaxSpeed.x;
+            //}
 
 
         }
