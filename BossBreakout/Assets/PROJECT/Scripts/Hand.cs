@@ -12,7 +12,6 @@ public class Hand : MonoBehaviour {
     public float speedMultiplier = 2f;
     public float grabDist = -0.5f;
 
-    public Transform claw;
 
     [HideInInspector] public float waitTimer = -10f;
     [HideInInspector] public bool grabbed = false;
@@ -23,7 +22,10 @@ public class Hand : MonoBehaviour {
     private int throwdir;
     private Collider2D coll;
 
+    [HideInInspector] public bool broken = false;
 
+    public float respawnTime = 5f;
+    private float respawnTimer = 5f;
 
     private float currentInput;
 
@@ -32,6 +34,18 @@ public class Hand : MonoBehaviour {
     }
 
     void FixedUpdate() {
+
+
+        if(broken) {
+            if(Time.time > respawnTimer + respawnTime) {
+                GetComponent<Renderer>().enabled = true;
+            }
+        }
+
+
+
+
+
         if(grabbed) {
             if(waitTimer + waitTime < Time.time) {
                 Ball.activeBall.rb.simulated = true;
@@ -40,16 +54,16 @@ public class Hand : MonoBehaviour {
 
                 grabbed = false;
                 Ball.activeBall.rb.velocity = dir.normalized * currentballspeed * speedMultiplier;
-                claw.rotation = Quaternion.identity;
+                transform.parent.rotation = Quaternion.identity;
             }
             
         }
-        if(Time.time > waitTimer + waitTime + 0.2f) {
+        if(Time.time > waitTimer + waitTime + 0.3f) {
             coll.enabled = true;
         }
 
 
-        if(!grabbed) {
+        if(!grabbed && !broken) {
 
             float relativepos = Ball.activeBall.transform.position.x - transform.parent.parent.position.x;
             float targetDir = Mathf.Clamp(relativepos, -1, 1);
@@ -87,7 +101,7 @@ public class Hand : MonoBehaviour {
 
                 //Select Dir
                 throwdir = Random.Range(0, 3);
-                claw.rotation = Quaternion.Euler(0,0,45*(throwdir-1));
+                transform.parent.rotation = Quaternion.Euler(0,0,45*(throwdir-1));
 
                 Ball.activeBall.transform.position = transform.position - new Vector3(-(throwdir - 1),1,0).normalized * grabDist;//Add rotation
 
@@ -95,7 +109,10 @@ public class Hand : MonoBehaviour {
             } else {
                 Ball.activeBall.type = Ball.Type.Normal;
 
-                Boss.activeBoss.DeactivateHand(leftside);
+                broken = true;
+                respawnTimer = Time.time;
+                GetComponent<Renderer>().enabled = false;
+
             }
         }
     }

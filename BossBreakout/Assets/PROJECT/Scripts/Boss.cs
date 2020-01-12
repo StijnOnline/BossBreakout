@@ -32,26 +32,34 @@ public class Boss : Block {
 
     public void Update() {
 
-        if(!hand1.gameObject.activeSelf) {
-            if(Time.time > hand1RespawnTimer + handRespawnTime ) {
-                hand1.gameObject.SetActive(true);
-                //Ball.activeBall.rb.velocity = Ball.activeBall.minMaxSpeed.x * Vector2.one;
-                //Ball.activeBall.rb.simulated = false;
-                //Ball.activeBall.transform.position = hand1.transform.position - new Vector3(0, 0.5f);
-                //hand1.grabbed = true;
-                //hand1.waitTimer = Time.time;
-            }
-        }
-        if(!hand2.gameObject.activeSelf) {
-            if(Time.time > hand2RespawnTimer + handRespawnTime) {
-                hand2.gameObject.SetActive(true);
-                //Ball.activeBall.rb.velocity = Ball.activeBall.minMaxSpeed.x * Vector2.one;
-                //Ball.activeBall.rb.simulated = false;
-                //Ball.activeBall.transform.position = hand2.transform.position - new Vector3(0, 0.5f);
-                //hand2.grabbed = true;
-                //hand2.waitTimer = Time.time;
-            }
-        }
+        //if(!hand1.gameObject.activeSelf) {
+        //    if(Time.time > hand1RespawnTimer + handRespawnTime ) {
+        //        //hand1.gameObject.SetActive(true);
+
+        //        hand1.broken = false;
+
+        //        //Ball.activeBall.rb.velocity = Ball.activeBall.minMaxSpeed.x * Vector2.one;
+        //        //Ball.activeBall.rb.simulated = false;
+        //        //Ball.activeBall.transform.position = hand1.transform.position - new Vector3(0, 0.5f);
+        //        //hand1.grabbed = true;
+        //        //hand1.waitTimer = Time.time;
+        //    }
+        //}
+        //if(!hand2.gameObject.activeSelf) {
+        //    if(Time.time > hand2RespawnTimer + handRespawnTime) {
+        //        hand2.gameObject.SetActive(true);
+                
+                
+        //        hand2.broken = false;
+
+
+        //        //Ball.activeBall.rb.velocity = Ball.activeBall.minMaxSpeed.x * Vector2.one;
+        //        //Ball.activeBall.rb.simulated = false;
+        //        //Ball.activeBall.transform.position = hand2.transform.position - new Vector3(0, 0.5f);
+        //        //hand2.grabbed = true;
+        //        //hand2.waitTimer = Time.time;
+        //    }
+        //}
         
     }
 
