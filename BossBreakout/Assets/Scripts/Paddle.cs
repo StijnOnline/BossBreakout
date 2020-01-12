@@ -52,17 +52,19 @@ public class Paddle : MonoBehaviour {
         if(go.layer == LayerMask.NameToLayer("Ball")) {
             Rigidbody2D rb = go.GetComponent<Rigidbody2D>();
             Ball b = go.GetComponent<Ball>();
-            rb.velocity = (rb.velocity.magnitude * (transform.position - go.transform.position) * -1f);
+
+            rb.velocity = (rb.velocity.magnitude * (transform.position - go.transform.position).normalized * -1f);
+            throwspeed = rb.velocity * hitMultiplier;
             
             
             
             if(b.type != Ball.Type.Heal) {
                 b.playerHit = true;
+                //TODO make heal ball actually heal
             }
 
 
 
-            throwspeed = rb.velocity * hitMultiplier;
 
             Ball.activeBall.rb.simulated = false;
             pauseTimer = Time.time;
