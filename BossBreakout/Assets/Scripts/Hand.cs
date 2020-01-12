@@ -18,9 +18,10 @@ public class Hand : MonoBehaviour {
     public Vector3 grabpos = new Vector3(0,-0.5f);
 
     private int lastType;
+    private Collider2D coll;
 
     void Start() {
-
+        coll = GetComponent<Collider2D>();
     }
 
     void FixedUpdate() {
@@ -32,6 +33,10 @@ public class Hand : MonoBehaviour {
 
                 grabbed = false;
                 Ball.activeBall.rb.velocity = dir.normalized * currentballspeed * speedMultiplier;
+                coll.enabled = true;
+            }
+            if(waitTimer + waitTime + 0.5f < Time.time) {
+
             }
         }
 
@@ -80,6 +85,9 @@ public class Hand : MonoBehaviour {
 
                 Ball.activeBall.transform.position = transform.position - grabpos;
                 Ball.activeBall.rb.simulated = false;
+
+                coll.enabled = false;
+
             } else {
                 Ball.activeBall.type = Ball.Type.Normal;
 
