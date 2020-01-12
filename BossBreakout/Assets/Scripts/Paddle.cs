@@ -38,7 +38,7 @@ public class Paddle : MonoBehaviour {
 
         if(grabbed) {
             if( Time.time > pauseTimer + pauseTime) {
-                Ball.activeBall.rb.simulated = true;
+                Ball.activeBall.rb.isKinematic = false;
                 Ball.activeBall.rb.velocity = throwspeed;
                 grabbed = false;
                 Camera.main.GetComponent<ScreenShake>().Shake(throwspeed.magnitude);
@@ -59,8 +59,7 @@ public class Paddle : MonoBehaviour {
             Rigidbody2D rb = go.GetComponent<Rigidbody2D>();
             Ball b = go.GetComponent<Ball>();
 
-            rb.velocity = (rb.velocity.magnitude * new Vector2( (transform.position - go.transform.position).normalized.x * -1f, 1) );
-            throwspeed = rb.velocity * hitMultiplier;
+            throwspeed = (rb.velocity.magnitude * new Vector2((transform.position - go.transform.position).normalized.x * -1f, 1)) * hitMultiplier;
             
             
             
@@ -72,7 +71,7 @@ public class Paddle : MonoBehaviour {
 
 
 
-            Ball.activeBall.rb.simulated = false;
+            Ball.activeBall.rb.isKinematic = true;
             pauseTimer = Time.time;
             grabbed = true;
             //else if(!b.playerHit) {
