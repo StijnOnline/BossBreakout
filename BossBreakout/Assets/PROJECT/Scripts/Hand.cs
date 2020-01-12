@@ -38,6 +38,7 @@ public class Hand : MonoBehaviour {
 
         if(broken) {
             if(Time.time > respawnTimer + respawnTime) {
+                broken = false;
                 GetComponent<Renderer>().enabled = true;
             }
         }
@@ -70,13 +71,16 @@ public class Hand : MonoBehaviour {
             currentInput = targetDir;
 
             Vector3 newpos = transform.parent.parent.position;
-            newpos.x = Mathf.Max(Mathf.Min(minMaxPos.y, newpos.x + currentInput * movespeed), minMaxPos.x);
+            newpos.x = Mathf.Clamp(newpos.x + currentInput * movespeed, minMaxPos.x, minMaxPos.y);
             transform.parent.parent.position = newpos;
         }
     }
 
 
     private void OnTriggerEnter2D(Collider2D collision) {
+        if(broken)
+            return;
+
         GameObject go = collision.gameObject;
         if(go.layer == LayerMask.NameToLayer("Ball")) {
             Rigidbody2D rb = go.GetComponent<Rigidbody2D>();
