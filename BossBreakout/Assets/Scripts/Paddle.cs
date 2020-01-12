@@ -53,11 +53,13 @@ public class Paddle : MonoBehaviour {
 
     private void OnCollisionEnter2D(Collision2D collision) {
         GameObject go = collision.gameObject;
+        if(grabbed)
+            return;
         if(go.layer == LayerMask.NameToLayer("Ball")) {
             Rigidbody2D rb = go.GetComponent<Rigidbody2D>();
             Ball b = go.GetComponent<Ball>();
 
-            rb.velocity = (rb.velocity.magnitude * (transform.position - go.transform.position).normalized * -1f);
+            rb.velocity = (rb.velocity.magnitude * new Vector2( (transform.position - go.transform.position).normalized.x,1) * -1f);
             throwspeed = rb.velocity * hitMultiplier;
             
             

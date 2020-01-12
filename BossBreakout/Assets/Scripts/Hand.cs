@@ -54,8 +54,7 @@ public class Hand : MonoBehaviour {
         }
     }
 
-
-    private void OnCollisionEnter2D(Collision2D collision) {
+    private void OnTriggerEnter2D(Collider2D collision) {
         GameObject go = collision.gameObject;
         if(go.layer == LayerMask.NameToLayer("Ball")) {
             Rigidbody2D rb = go.GetComponent<Rigidbody2D>();
