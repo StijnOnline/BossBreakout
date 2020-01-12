@@ -28,7 +28,8 @@ public class Paddle_script : MonoBehaviour
 {
 	//Public Variables will appear in the Inspector
     public Boundary boundary;		//Create an object from class
-    public float paddleSpeed;		//Speed of the paddle
+    public float paddleSpeed; //Speed of the paddle
+    public float yMax;
 
 	//Private Variables
 	private Rigidbody2D rb2D;		//Will Connect with the Ball Rigidbody 2D Component
@@ -47,6 +48,6 @@ public class Paddle_script : MonoBehaviour
 		rb2D.velocity = movement * paddleSpeed;		//Add Velocity to the player ship rigidbody by multiplying the movement with paddleSpeed
 
         //Lock the position of the Paddle in the screen by putting a boundaries
-        rb2D.position = new Vector2 (Mathf.Clamp (rb2D.position.x, boundary.xMin, boundary.xMax),-4f);
+        rb2D.position = new Vector2 (Mathf.Clamp (rb2D.position.x, boundary.xMin, boundary.xMax),yMax);
 	}
 }
