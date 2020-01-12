@@ -33,13 +33,13 @@ public class Hand : MonoBehaviour {
 
                 grabbed = false;
                 Ball.activeBall.rb.velocity = dir.normalized * currentballspeed * speedMultiplier;
-                coll.enabled = true;
+                
             }
-            if(waitTimer + waitTime + 0.5f < Time.time) {
-
-            }
+            
         }
-
+        if(Time.time > waitTimer + waitTime + 0.1f) {
+            coll.enabled = true;
+        }
 
 
         if(!grabbed) {
