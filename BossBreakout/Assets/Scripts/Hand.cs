@@ -89,7 +89,7 @@ public class Hand : MonoBehaviour {
     }
 
     public int RandomType() {
-        float r = Random.Range(0, 1);
+        float r = Random.Range(0f, 1f);
         if(r < 0.6f) {
             return 0;
         }else if(lastType == 2 && r > 0.8) {

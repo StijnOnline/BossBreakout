@@ -20,9 +20,12 @@ public class Paddle : MonoBehaviour {
     private float pauseTimer = -1f;
     private Vector2 throwspeed;
 
+    private Rigidbody2D rb;
+
     void Start() {
         //TODO remove temp:
         r = GetComponent<Renderer>();
+        rb = GetComponent<Rigidbody2D>();
     }
 
     void Update() {
@@ -42,9 +45,10 @@ public class Paddle : MonoBehaviour {
             }
         }
 
-        Vector3 newpos = transform.position;
-        newpos.x = Mathf.Max(Mathf.Min(minMaxPos.y, newpos.x + input_hor * (input_dash ? dashDist : movespeed)), minMaxPos.x);
-        transform.position = newpos;
+        //Vector3 newpos = transform.position;
+        //newpos.x = Mathf.Max(Mathf.Min(minMaxPos.y, newpos.x + , minMaxPos.x);
+        //transform.position = newpos;
+        rb.velocity = new Vector2(input_hor * (input_dash ? dashDist : movespeed),0);
     }
 
     private void OnCollisionEnter2D(Collision2D collision) {
