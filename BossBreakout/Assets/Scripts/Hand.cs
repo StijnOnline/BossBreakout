@@ -5,20 +5,27 @@ using UnityEngine;
 public class Hand : MonoBehaviour {
 
     public float movespeed = 0.05f;
-    private float currentInput;
     public Vector2 minMaxPos;
+    public bool leftside;
+
+    public float waitTime = 2f;
+    public float speedMultiplier = 2f;
+    public float grabDist = -0.5f;
+
+    public Transform claw;
 
     [HideInInspector] public float waitTimer = -10f;
-    public float waitTime = 2f;
     [HideInInspector] public bool grabbed = false;
-    private int throwdir;
-    private float currentballspeed;
-    public float speedMultiplier = 2f;
-    public bool leftside;
-    public Vector3 grabpos = new Vector3(0,-0.5f);
 
+
+    private float currentballspeed;
     private int lastType;
+    private int throwdir;
     private Collider2D coll;
+
+
+
+    private float currentInput;
 
     void Start() {
         coll = GetComponent<Collider2D>();
@@ -33,7 +40,7 @@ public class Hand : MonoBehaviour {
 
                 grabbed = false;
                 Ball.activeBall.rb.velocity = dir.normalized * currentballspeed * speedMultiplier;
-                
+                claw.rotation = Quaternion.identity;
             }
             
         }
@@ -44,13 +51,13 @@ public class Hand : MonoBehaviour {
 
         if(!grabbed) {
 
-            float relativepos = Ball.activeBall.transform.position.x - transform.position.x;
+            float relativepos = Ball.activeBall.transform.position.x - transform.parent.parent.position.x;
             float targetDir = Mathf.Clamp(relativepos, -1, 1);
             currentInput = targetDir;
 
-            Vector3 newpos = transform.localPosition;
+            Vector3 newpos = transform.parent.parent.position;
             newpos.x = Mathf.Max(Mathf.Min(minMaxPos.y, newpos.x + currentInput * movespeed), minMaxPos.x);
-            transform.localPosition = newpos;
+            transform.parent.parent.position = newpos;
         }
     }
 
@@ -65,28 +72,25 @@ public class Hand : MonoBehaviour {
 
             if(currentballspeed != b.minMaxSpeed.y) {
 
-                grabbed = true;
-                Ball.activeBall.playerHit = false;
-
-
-                lastType = (int) Ball.activeBall.type;
-                //int type = Random.Range(0, 4);
-                //int type = 2;
-                int type = RandomType();
-
-
-                Ball.activeBall.type = (Ball.Type)(type);
-                throwdir = Random.Range(0, 3);
                 waitTimer = Time.time;
+                grabbed = true;
+                coll.enabled = false;
+                Ball.activeBall.playerHit = false;
+                Ball.activeBall.rb.simulated = false;
+
+                //Select Type
+                lastType = (int) Ball.activeBall.type;
+                int type = RandomType();
+                Ball.activeBall.type = (Ball.Type)(type);
 
                 ThrowIndicator.activeIndicator.SetIndicator(throwdir, type);
 
+                //Select Dir
+                throwdir = Random.Range(0, 3);
+                claw.rotation = Quaternion.Euler(0,0,45*(throwdir-1));
 
+                Ball.activeBall.transform.position = transform.position - new Vector3(-(throwdir - 1),1,0).normalized * grabDist;//Add rotation
 
-                Ball.activeBall.transform.position = transform.position - grabpos;
-                Ball.activeBall.rb.simulated = false;
-
-                coll.enabled = false;
 
             } else {
                 Ball.activeBall.type = Ball.Type.Normal;

@@ -10,8 +10,6 @@ public class Paddle : MonoBehaviour {
 
     public Vector2 minMaxPos;
 
-    private Renderer r;
-
     float input_hor;
     bool input_dash;
 
@@ -23,8 +21,6 @@ public class Paddle : MonoBehaviour {
     private Rigidbody2D rb;
 
     void Start() {
-        //TODO remove temp:
-        r = GetComponent<Renderer>();
         rb = GetComponent<Rigidbody2D>();
     }
 
@@ -33,7 +29,7 @@ public class Paddle : MonoBehaviour {
         input_dash = Input.GetKeyDown(KeyCode.Space) || Input.GetKeyDown(KeyCode.LeftShift) || Input.GetKeyDown(KeyCode.RightShift) || Input.GetKeyDown(KeyCode.LeftControl) || Input.GetKeyDown(KeyCode.RightControl);
     }
 
-    //TODO dash
+
     void FixedUpdate() {
 
         if(grabbed) {
@@ -71,9 +67,12 @@ public class Paddle : MonoBehaviour {
 
 
 
-            Ball.activeBall.rb.isKinematic = true;
+            b.rb.isKinematic = true;
             pauseTimer = Time.time;
             grabbed = true;
+            
+            
+            
             //else if(!b.playerHit) {
             //    rb.velocity = rb.velocity.normalized * b.minMaxSpeed.x;
             //}
