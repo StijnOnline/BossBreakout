@@ -37,7 +37,7 @@ public class Hand : MonoBehaviour {
             }
             
         }
-        if(Time.time > waitTimer + waitTime + 0.1f) {
+        if(Time.time > waitTimer + waitTime + 0.2f) {
             coll.enabled = true;
         }
 
@@ -53,6 +53,7 @@ public class Hand : MonoBehaviour {
             transform.localPosition = newpos;
         }
     }
+
 
     private void OnTriggerEnter2D(Collider2D collision) {
         GameObject go = collision.gameObject;
