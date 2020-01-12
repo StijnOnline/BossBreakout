@@ -59,7 +59,7 @@ public class Paddle : MonoBehaviour {
             Rigidbody2D rb = go.GetComponent<Rigidbody2D>();
             Ball b = go.GetComponent<Ball>();
 
-            rb.velocity = (rb.velocity.magnitude * new Vector2( (transform.position - go.transform.position).normalized.x,1) * -1f);
+            rb.velocity = (rb.velocity.magnitude * new Vector2( (transform.position - go.transform.position).normalized.x * -1f, 1) );
             throwspeed = rb.velocity * hitMultiplier;
             
             
