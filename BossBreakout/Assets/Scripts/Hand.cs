@@ -37,7 +37,7 @@ public class Hand : MonoBehaviour {
             }
             
         }
-        if(Time.time > waitTimer + waitTime + 0.1f) {
+        if(Time.time > waitTimer + waitTime + 0.2f) {
             coll.enabled = true;
         }
 
@@ -55,7 +55,7 @@ public class Hand : MonoBehaviour {
     }
 
 
-    private void OnCollisionEnter2D(Collision2D collision) {
+    private void OnTriggerEnter2D(Collider2D collision) {
         GameObject go = collision.gameObject;
         if(go.layer == LayerMask.NameToLayer("Ball")) {
             Rigidbody2D rb = go.GetComponent<Rigidbody2D>();
