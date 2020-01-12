@@ -17,6 +17,8 @@ public class Hand : MonoBehaviour {
     public bool leftside;
     public Vector3 grabpos = new Vector3(0,-0.5f);
 
+    private int lastType;
+
     void Start() {
 
     }
@@ -61,9 +63,14 @@ public class Hand : MonoBehaviour {
                 grabbed = true;
                 Ball.activeBall.playerHit = false;
 
-                int type = Random.Range(0, 4);
+
+                lastType = (int) Ball.activeBall.type;
+                //int type = Random.Range(0, 4);
                 //int type = 2;
-                Ball.activeBall.type = (Ball.Type)(type%3);
+                int type = RandomType();
+
+
+                Ball.activeBall.type = (Ball.Type)(type);
                 throwdir = Random.Range(0, 3);
                 waitTimer = Time.time;
 
@@ -78,6 +85,17 @@ public class Hand : MonoBehaviour {
 
                 Boss.activeBoss.DeactivateHand(leftside);
             }
+        }
+    }
+
+    public int RandomType() {
+        float r = Random.Range(0, 1);
+        if(r < 0.6f) {
+            return 0;
+        }else if(lastType == 2 && r > 0.8) {
+            return 1;
+        } else {
+            return 2;
         }
     }
 }
