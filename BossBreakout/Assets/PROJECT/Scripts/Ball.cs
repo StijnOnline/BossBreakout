@@ -75,7 +75,8 @@ public class Ball : MonoBehaviour
                 foreach(Collider2D item in results) {
                     Block b = item?.GetComponent<Block>();
                     if(b != null) {
-                        b.TakeDamage(1000000);
+                        if(!b.invurnerable)
+                            b.TakeDamage(1000000);
                     }
                         
                 }
