@@ -24,13 +24,13 @@ public class Tube : MonoBehaviour
     public IEnumerator ChainReaction(int startpoint) {
         int i = startpoint;
 
-        for(int j = 0; j < System.Math.Max(startpoint, transform.childCount-startpoint); j++) {
-            yield return new WaitForSeconds(0.1f);
-            if(transform.GetChild(i+1)!= null) {
-                transform.GetChild(i + 1).gameObject.SetActive(false);
+        for(int j = 0; j <= System.Math.Max(startpoint, transform.childCount-startpoint); j++) {
+            yield return new WaitForSeconds(0.18f);
+            if(i + j < transform.childCount) {
+                transform.GetChild(i + j).gameObject.SetActive(false);
             }
-            if(transform.GetChild(i - 1) != null) {
-                transform.GetChild(i - 1).gameObject.SetActive(false);
+            if(i - j >= 0) {
+                transform.GetChild(i - j).gameObject.SetActive(false);
             }
         }
     }
