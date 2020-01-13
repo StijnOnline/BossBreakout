@@ -71,23 +71,40 @@ public class Boss : Block {
     }
 
     public void LostTube(bool leftside) {
-        stage++;
-        Vector3 move = new Vector3(0, -handMoveDist);
+        
+        
 
         Debug.Log("OOF LOST A 'Tube");
+        StartCoroutine(ChangePhase(leftside));
+    }
+
+    public IEnumerator ChangePhase(bool leftside) {
+
+        
+        Ball.activeBall.gameObject.SetActive(false);
+
+        yield return new WaitForSeconds(2f);
+        //Animation
+
+        Vector3 move = new Vector3(0, -handMoveDist);
         if(leftside) {
             hand1.transform.parent.parent.Translate(move);
             rails1.Translate(move);
+            Ball.activeBall.transform.position = hand1.transform.position;
         } else {
             hand2.transform.parent.parent.Translate(move);
             rails2.Translate(move);
+            Ball.activeBall.transform.position = hand2.transform.position;
         }
+        Ball.activeBall.gameObject.SetActive(true);
+        Ball.activeBall.rb.velocity = Vector2.one * Ball.activeBall.minMaxSpeed.x;
 
         if(stage == 4) {
             invurnerable = false;
             forceField.SetActive(false);
         }
 
+        stage++;
         ResetBlocks();
     }
 
