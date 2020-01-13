@@ -51,6 +51,10 @@ public class Ball : MonoBehaviour
 
     public void SetType(Type _type) {
         type = _type;
+        if (type == Type.Explosive)
+        {
+            AudioPlayer.Instance.PlaySound("Countdown_0", 0.1f);
+        }
         sr.sprite = sprites[(int)type];
         Debug.Log("now " + type);
     }
@@ -80,6 +84,7 @@ public class Ball : MonoBehaviour
                 explodeCount = 0;
                 SetType(Type.Normal);
             } else {
+                AudioPlayer.Instance.PlaySound("Countdown_"+ (explodeCount+1), 0.1f);
                 sr.sprite = sprites[explodeCount + 2];
 
             }

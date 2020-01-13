@@ -49,8 +49,11 @@ public class Block : MonoBehaviour {
         PlayHitSound();
 
 
-        if(!invurnerable) currentHP--;
-        if(currentHP <= 0) {
+        if (invurnerable)
+            return;
+            currentHP--;
+
+        if (currentHP <= 0) {
             Boss.activeBoss.LostBlock();
             Destroyed();
         }
