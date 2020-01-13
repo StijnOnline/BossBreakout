@@ -4,6 +4,9 @@ using UnityEngine;
 
 public class Hand : MonoBehaviour {
 
+    public int startHP = 2;
+    private int currentHP;
+
     public float movespeed = 0.05f;
     public Vector2 minMaxPos;
     public bool leftside;
@@ -40,7 +43,7 @@ public class Hand : MonoBehaviour {
             if(Time.time > respawnTimer + respawnTime) {
                 broken = false;
                 GetComponent<Renderer>().enabled = true;
-
+                currentHP = startHP;
             }
         }
 
@@ -122,10 +125,14 @@ public class Hand : MonoBehaviour {
             } else {
                 Ball.activeBall.type = Ball.Type.Normal;
 
-                broken = true;
-                respawnTimer = Time.time;
-                GetComponent<Renderer>().enabled = false;
-
+                currentHP--;
+                coll.enabled = false;
+                waitTimer = Time.time;
+                if(currentHP <= 0) {
+                    respawnTimer = Time.time;
+                    broken = true;
+                    GetComponent<Renderer>().enabled = false;
+                }
             }
         }
     }
