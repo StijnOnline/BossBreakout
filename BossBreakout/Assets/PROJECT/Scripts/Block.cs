@@ -16,7 +16,7 @@ public class Block : MonoBehaviour {
     }
 
     public void OnCollisionEnter2D(Collision2D collision) {
-        if(Ball.activeBall.type == Ball.Type.Heal)
+        if(Ball.activeBall.type == Ball.Type.Explosive)
             return;
         
         
@@ -27,6 +27,10 @@ public class Block : MonoBehaviour {
         //    Ball.activeBall.type = Ball.Type.Normal;
 
 
+        TakeDamage(1);
+    }
+
+    public void TakeDamage(int dmg) {
         PlayHitSound();
 
 

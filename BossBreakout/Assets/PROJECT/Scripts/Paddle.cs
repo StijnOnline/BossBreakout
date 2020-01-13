@@ -82,12 +82,6 @@ public class Paddle : MonoBehaviour
                 Debug.Log("3");
             }
 
-            if (b.type != Ball.Type.Heal)
-            {
-                b.playerHit = true;
-                //TODO make heal ball actually heal
-            }
-
 
 
 

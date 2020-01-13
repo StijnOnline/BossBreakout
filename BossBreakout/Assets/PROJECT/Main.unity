@@ -12124,6 +12124,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   leftside: 0
   broken: 0
+  ExplosionPrefab: {fileID: 0}
 --- !u!1001 &394989636
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -12304,6 +12305,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   leftside: 1
   broken: 0
+  ExplosionPrefab: {fileID: 0}
 --- !u!1 &401737224
 GameObject:
   m_ObjectHideFlags: 0
@@ -32858,6 +32860,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   leftside: 1
   broken: 0
+  ExplosionPrefab: {fileID: 0}
 --- !u!1001 &1110826775
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -40118,6 +40121,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   leftside: 0
   broken: 0
+  ExplosionPrefab: {fileID: 0}
 --- !u!1001 &1313931185
 PrefabInstance:
   m_ObjectHideFlags: 0
