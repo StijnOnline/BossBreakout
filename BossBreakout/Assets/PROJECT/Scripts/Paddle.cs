@@ -58,10 +58,11 @@ public class Paddle : MonoBehaviour
             return;
         if (go.layer == LayerMask.NameToLayer("Ball"))
         {
-            Rigidbody2D rb = go.GetComponent<Rigidbody2D>();
             Ball b = go.GetComponent<Ball>();
+            Rigidbody2D rb = go.GetComponent<Rigidbody2D>();
 
             throwspeed = (rb.velocity.magnitude * new Vector2((transform.position - go.transform.position).normalized.x * -1f, 1)) * hitMultiplier;
+            rb.velocity = Vector2.zero;
 
             if (throwspeed.magnitude >=5)
             {

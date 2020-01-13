@@ -11,6 +11,8 @@ public class Boss : Block {
 
     public Hand hand1;
     public Hand hand2;
+    public Transform rails1;
+    public Transform rails2;
     public GameObject forceField;
     public Block[] blocks;
 
@@ -64,31 +66,21 @@ public class Boss : Block {
     }
 
 
-    public void DeactivateHand(bool leftside) {
-        if(leftside) {
-
-            hand1.gameObject.SetActive(false);
-            hand1RespawnTimer = Time.time;
-        } else {
-            hand2.gameObject.SetActive(false);
-            hand2RespawnTimer = Time.time;
-        }
-
-    }
-
-
     public void LostBlock() {
         Debug.Log("OOF LOST A BLOCK");
     }
 
     public void LostTube(bool leftside) {
         stage++;
+        Vector3 move = new Vector3(0, -handMoveDist);
 
         Debug.Log("OOF LOST A 'Tube");
         if(leftside) {
-            hand1.transform.Translate(new Vector3(0, -handMoveDist));
+            hand1.transform.parent.parent.Translate(move);
+            rails1.Translate(move);
         } else {
-            hand2.transform.Translate(new Vector3(0, -handMoveDist));
+            hand2.transform.parent.parent.Translate(move);
+            rails2.Translate(move);
         }
 
         if(stage == 4) {
@@ -109,6 +101,6 @@ public class Boss : Block {
 
     public override void Destroyed() {
         gameObject.SetActive(false);
-
+        //coole death animation
     }
 }
