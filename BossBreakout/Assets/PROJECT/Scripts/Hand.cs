@@ -32,6 +32,10 @@ public class Hand : MonoBehaviour {
 
     private float currentInput;
 
+
+    public GameObject SparkPrefab;
+    public GameObject ExplosionPrefab;
+
     void Start() {
         coll = GetComponent<Collider2D>();
     }
@@ -83,6 +87,11 @@ public class Hand : MonoBehaviour {
 
            
         }
+
+
+        if(currentHP < 2 && Time.time % 1 < 0.2f) {
+            Destroy(Instantiate(SparkPrefab, transform.position, Quaternion.identity), 10f);
+        }
     }
 
 
@@ -132,6 +141,7 @@ public class Hand : MonoBehaviour {
                     respawnTimer = Time.time;
                     broken = true;
                     GetComponent<Renderer>().enabled = false;
+                    Destroy(Instantiate(ExplosionPrefab, transform.position, Quaternion.identity), 10f);
                 }
             }
         }
