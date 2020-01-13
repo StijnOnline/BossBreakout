@@ -104,24 +104,36 @@ public class Hand : MonoBehaviour {
 
         GameObject go = collision.gameObject;
         if(go.layer == LayerMask.NameToLayer("Ball")) {
+
+            //Exploding ball
+            Ball.activeBall.CountExplosion();
+
+
+
+
+
+
             Rigidbody2D rb = go.GetComponent<Rigidbody2D>();
             Ball b = go.GetComponent<Ball>();
 
             currentballspeed = rb.velocity.magnitude;
 
-            if(currentballspeed != b.minMaxSpeed.y) {
+            if(currentballspeed != b.minMaxSpeed.y || Ball.activeBall.explodeCount >= 3) {
 
                 waitTimer = Time.time;
                 grabbed = true;
                 coll.enabled = false;
-                Ball.activeBall.playerHit = false;
                 Ball.activeBall.rb.simulated = false;
 
                 //Select Type
-                lastType = (int) Ball.activeBall.type;
-                int type = RandomType();
-                Ball.activeBall.type = (Ball.Type)(type);
 
+                lastType = (int) Ball.activeBall.type;
+                int type = lastType;
+                if(lastType != (int) Ball.Type.Explosive ^ Ball.activeBall.explodeCount == 3) {
+                    type = RandomType();
+                    Debug.Log(type);
+                    Ball.activeBall.SetType((Ball.Type)(type));
+                }
                 ThrowIndicator.activeIndicator.SetIndicator(throwdir, type);
 
                 //Select Dir
@@ -132,7 +144,7 @@ public class Hand : MonoBehaviour {
 
 
             } else {
-                Ball.activeBall.type = Ball.Type.Normal;
+                Ball.activeBall.SetType(Ball.Type.Normal);
 
                 currentHP--;
                 coll.enabled = false;
