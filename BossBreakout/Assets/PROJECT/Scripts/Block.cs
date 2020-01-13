@@ -6,6 +6,7 @@ public class Block : MonoBehaviour {
     public int startHP = 1;
     private int currentHP;
     public bool invurnerable = false;
+    
 
     public void OnEnable() {
         currentHP = startHP;

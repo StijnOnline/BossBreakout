@@ -40,6 +40,7 @@ public class Hand : MonoBehaviour {
             if(Time.time > respawnTimer + respawnTime) {
                 broken = false;
                 GetComponent<Renderer>().enabled = true;
+
             }
         }
 
@@ -49,11 +50,14 @@ public class Hand : MonoBehaviour {
 
         if(grabbed) {
             if(waitTimer + waitTime < Time.time) {
+                AudioPlayer.Instance.PlaySound("Claw_Release", 0.1f);
+
                 Ball.activeBall.rb.simulated = true;
                 Vector2 dir = new Vector2(0, -Ball.activeBall.minMaxSpeed.x);
                 dir += (throwdir - 1) * new Vector2(Ball.activeBall.minMaxSpeed.x, 0);
 
                 grabbed = false;
+                
                 Ball.activeBall.rb.velocity = dir.normalized * currentballspeed * speedMultiplier;
                 transform.parent.rotation = Quaternion.identity;
             }
@@ -73,6 +77,8 @@ public class Hand : MonoBehaviour {
             Vector3 newpos = transform.parent.parent.position;
             newpos.x = Mathf.Clamp(newpos.x + currentInput * movespeed, minMaxPos.x, minMaxPos.y);
             transform.parent.parent.position = newpos;
+
+           
         }
     }
 
@@ -80,6 +86,9 @@ public class Hand : MonoBehaviour {
     private void OnTriggerEnter2D(Collider2D collision) {
         if(broken)
             return;
+
+        AudioPlayer.Instance.PlaySound("Claw_Grab", 0.1f);
+
 
         GameObject go = collision.gameObject;
         if(go.layer == LayerMask.NameToLayer("Ball")) {
