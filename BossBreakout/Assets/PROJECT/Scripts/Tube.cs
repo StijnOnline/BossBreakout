@@ -14,8 +14,23 @@ public class Tube : MonoBehaviour
                 if(!transform.GetChild(i).gameObject.activeSelf) {
                     broken = true;
                     Boss.activeBoss.LostTube(leftside);
+                    StartCoroutine(ChainReaction(i));
                     break;
                 }
+            }
+        }
+    }
+
+    public IEnumerator ChainReaction(int startpoint) {
+        int i = startpoint;
+
+        for(int j = 0; j < System.Math.Max(startpoint, transform.childCount-startpoint); j++) {
+            yield return new WaitForSeconds(0.1f);
+            if(transform.GetChild(i+1)!= null) {
+                transform.GetChild(i + 1).gameObject.SetActive(false);
+            }
+            if(transform.GetChild(i - 1) != null) {
+                transform.GetChild(i - 1).gameObject.SetActive(false);
             }
         }
     }
