@@ -9,7 +9,22 @@ public class Block : MonoBehaviour {
     public float speedMultiplier = 1f;
     public bool bottom;
     public bool strong;
-    
+
+
+    private SpriteRenderer SpriteRender;
+    public Sprite armour_0;
+    public Sprite armour_1;
+    public Sprite armour_2;
+
+
+
+
+    public void Start()
+    {
+        SpriteRender = GetComponent<SpriteRenderer>();
+        
+    }
+
 
     public void OnEnable() {
         currentHP = startHP;
@@ -39,6 +54,27 @@ public class Block : MonoBehaviour {
             Boss.activeBoss.LostBlock();
             Destroyed();
         }
+
+
+        if (currentHP == 3)
+        {
+            SpriteRender.sprite = armour_0;
+        }
+
+        if (currentHP == 2)
+        {
+            SpriteRender.sprite = armour_1;
+        }
+
+        if (currentHP == 1)
+        {
+            SpriteRender.sprite = armour_2;
+        }
+
+
+
+
+
     }
 
     public virtual void PlayHitSound() {
