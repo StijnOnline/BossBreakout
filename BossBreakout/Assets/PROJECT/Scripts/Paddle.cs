@@ -84,6 +84,8 @@ public class Paddle : MonoBehaviour {
             if(hitTimer + hitTime > Time.time) {
                 throwspeed = throwspeed * hitMultiplier;
 
+                AudioPlayer.Instance.PlaySound("Paddle_Parry", 0.1f);
+
                 Camera.main.GetComponent<ScreenShake>().Shake(throwspeed.magnitude);
                 foreach(SpriteRenderer r in renderers) {
                     r.sprite = sprites[2];
@@ -91,20 +93,26 @@ public class Paddle : MonoBehaviour {
             } else {
                 foreach(SpriteRenderer r in renderers) {
                     r.sprite = sprites[3];
+                    throwspeed = throwspeed * 1 / hitMultiplier;
+                    AudioPlayer.Instance.PlaySound("Paddle_Failure", 0.1f);
+
                 }
             }
 
-            if(throwspeed.magnitude >= 5) {
+
+
+
+            if(rb.velocity.magnitude >= 5) {
                 AudioPlayer.Instance.PlaySound("Paddle_Hit1", 0.1f);
                 Debug.Log("1");
             }
 
-            if(throwspeed.magnitude >= 11) {
+            if(rb.velocity.magnitude >= 11) {
                 AudioPlayer.Instance.PlaySound("Paddle_Hit2", 0.1f);
                 Debug.Log("2");
             }
 
-            if(throwspeed.magnitude >= 16) {
+            if(rb.velocity.magnitude >= 16) {
                 AudioPlayer.Instance.PlaySound("Paddle_Hit3", 0.1f);
                 Debug.Log("3");
             }
