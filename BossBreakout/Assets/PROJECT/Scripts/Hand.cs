@@ -109,7 +109,7 @@ public class Hand : MonoBehaviour {
 
             currentballspeed = rb.velocity.magnitude;
 
-            if(currentballspeed > 0.9 * b.minMaxSpeed.y || Ball.activeBall.explodeCount >= 3) {
+            if(currentballspeed < 0.9f * b.minMaxSpeed.y /* || Ball.activeBall.explodeCount >= 3*/) {
 
                 AudioPlayer.Instance.PlaySound("Claw_Grab", 0.1f);
 
