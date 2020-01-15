@@ -56,17 +56,17 @@ public class Ball : MonoBehaviour
 
     private void Update() {
 
-        //ghostDelayTimer -= Time.deltaTime;
-        //if(rb.velocity.magnitude == minMaxSpeed.y && ghostDelayTimer < 0) { //DISCUSS is this timer smart?
-        //    ghostDelayTimer = ghostDelay;
-        //    GameObject trail = new GameObject();
-        //    trail.transform.position = (Vector3) (rb.position -  rb.velocity * 0.015f);
-        //    trail.transform.localScale = transform.localScale;
-        //    SpriteRenderer r = trail.AddComponent<SpriteRenderer>();
-        //    r.sprite = sr.sprite;
-        //    r.color = new Color(0.5f, 0.5f, 0.5f, 0.5f);
-        //    Destroy(trail, 1f);
-        //}
+        ghostDelayTimer -= Time.deltaTime;
+        if(rb.velocity.magnitude == minMaxSpeed.y && ghostDelayTimer < 0) { //DISCUSS is this timer smart?
+            ghostDelayTimer = ghostDelay;
+            GameObject trail = new GameObject();
+            trail.transform.position = (Vector3)(rb.position - rb.velocity * 0.015f);
+            trail.transform.localScale = transform.localScale;
+            SpriteRenderer r = trail.AddComponent<SpriteRenderer>();
+            r.sprite = sr.sprite;
+            r.color = new Color(0.5f, 0.5f, 0.5f, 0.5f);
+            Destroy(trail, 1f);
+        }
     }
 
     public void SetType(Type _type) {

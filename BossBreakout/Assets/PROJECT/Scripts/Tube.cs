@@ -28,11 +28,11 @@ public class Tube : MonoBehaviour
             yield return new WaitForSeconds(0.18f);
             if(i + j < transform.childCount) {
                 transform.GetChild(i + j).gameObject.SetActive(false);
-                Destroy( Instantiate(ExplosionPrefab, transform.position, Quaternion.identity), 10f);
+                Destroy( Instantiate(ExplosionPrefab, transform.GetChild(i + j).position, Quaternion.identity), 10f);
             }
             if(i - j >= 0) {
                 transform.GetChild(i - j).gameObject.SetActive(false);
-                Destroy(Instantiate(ExplosionPrefab, transform.position, Quaternion.identity), 10f);
+                Destroy(Instantiate(ExplosionPrefab, transform.GetChild(i + j).position, Quaternion.identity), 10f);
             }
         }
     }
