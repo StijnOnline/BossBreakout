@@ -4,8 +4,8 @@ using UnityEngine;
 
 public class Hand : MonoBehaviour {
 
-    public int startHP = 2;
-    private int currentHP;
+    //public int startHP = 2;
+    //private int currentHP;
 
     public float movespeed = 0.05f;
     public Vector2 minMaxPos;
@@ -21,7 +21,7 @@ public class Hand : MonoBehaviour {
 
 
     private float currentballspeed;
-    private int lastType;
+    //private int lastType;
     private int throwdir;
     private Collider2D coll;
 
@@ -47,7 +47,7 @@ public class Hand : MonoBehaviour {
             if(Time.time > respawnTimer + respawnTime) {
                 broken = false;
                 GetComponent<Renderer>().enabled = true;
-                currentHP = startHP;
+                //currentHP = startHP;
             }
         }
 
@@ -84,14 +84,13 @@ public class Hand : MonoBehaviour {
             Vector3 newpos = transform.parent.parent.position;
             newpos.x = Mathf.Clamp(newpos.x + currentInput * movespeed, minMaxPos.x, minMaxPos.y);
             transform.parent.parent.position = newpos;
-
-           
+                       
         }
 
 
-        if(currentHP < 2 && Time.time % 1f < 0.01f) {
-            Destroy(Instantiate(SparkPrefab, transform.position, Quaternion.identity), 10f);
-        }
+        //if(currentHP < 2 && Time.time % 1f < 0.01f) {
+        //    Destroy(Instantiate(SparkPrefab, transform.position, Quaternion.identity), 10f);
+        //}
     }
 
 
@@ -99,26 +98,20 @@ public class Hand : MonoBehaviour {
         if(broken)
             return;
 
-        AudioPlayer.Instance.PlaySound("Claw_Grab", 0.1f);
-
-
         GameObject go = collision.gameObject;
         if(go.layer == LayerMask.NameToLayer("Ball")) {
 
             //Exploding ball
             Ball.activeBall.CountExplosion();
-
-
-
-
-
-
+                                                                    
             Rigidbody2D rb = go.GetComponent<Rigidbody2D>();
             Ball b = go.GetComponent<Ball>();
 
             currentballspeed = rb.velocity.magnitude;
 
             if(currentballspeed != b.minMaxSpeed.y || Ball.activeBall.explodeCount >= 3) {
+
+                AudioPlayer.Instance.PlaySound("Claw_Grab", 0.1f);
 
                 waitTimer = Time.time;
                 grabbed = true;
@@ -127,14 +120,17 @@ public class Hand : MonoBehaviour {
 
                 //Select Type
 
-                lastType = (int) Ball.activeBall.type;
-                int type = lastType;
-                if(lastType != (int) Ball.Type.Explosive ^ Ball.activeBall.explodeCount == 3) {
-                    type = RandomType();
-                    Debug.Log(type);
-                    Ball.activeBall.SetType((Ball.Type)(type));
-                }
-                ThrowIndicator.activeIndicator.SetIndicator(throwdir, type);
+                //lastType = (int) Ball.activeBall.type;
+                //int type = lastType;
+                //if(lastType != (int) Ball.Type.Explosive ^ Ball.activeBall.explodeCount == 3) {
+                //    type = RandomType();
+                //    Debug.Log(type);
+                //    Ball.activeBall.SetType((Ball.Type)(type));
+                //}
+                //ThrowIndicator.activeIndicator.SetIndicator(throwdir, type);
+
+
+
 
                 //Select Dir
                 throwdir = Random.Range(0, 3);
@@ -146,27 +142,27 @@ public class Hand : MonoBehaviour {
             } else {
                 Ball.activeBall.SetType(Ball.Type.Normal);
 
-                currentHP--;
+                //currentHP--;
                 coll.enabled = false;
                 waitTimer = Time.time;
-                if(currentHP <= 0) {
+                //if(currentHP <= 0) {
                     respawnTimer = Time.time;
                     broken = true;
                     GetComponent<Renderer>().enabled = false;
                     Destroy(Instantiate(ExplosionPrefab, transform.position, Quaternion.identity), 10f);
-                }
+                //}
             }
         }
     }
 
-    public int RandomType() {
-        float r = Random.Range(0f, 1f);
-        if(r < 0.6f) {
-            return 0;
-        }else if(lastType == 2 && r > 0.8f) {
-            return 1;
-        } else {
-            return 2;
-        }
-    }
+    //public int RandomType() {
+    //    float r = Random.Range(0f, 1f);
+    //    if(r < 0.6f) {
+    //        return 0;
+    //    }else if(lastType == 2 && r > 0.8f) {
+    //        return 1;
+    //    } else {
+    //        return 2;
+    //    }
+    //}
 }

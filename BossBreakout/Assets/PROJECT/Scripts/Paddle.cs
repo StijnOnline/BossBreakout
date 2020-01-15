@@ -1,11 +1,13 @@
 ﻿using UnityEngine;
 
-public class Paddle : MonoBehaviour
-{
+public class Paddle : MonoBehaviour {
+
+    public float hitTime = 0.5f;
+    private float hitTimer = 0;
+    public float hitMultiplier = 1.5f;
 
     public float movespeed = 0.2f;
     public float dashDist = 0.5f;
-    public float hitMultiplier = 1.5f;
 
     public Vector2 minMaxPos;
 
@@ -19,29 +21,37 @@ public class Paddle : MonoBehaviour
 
     private Rigidbody2D rb;
 
-    void Start()
-    {
+    public Sprite[] sprites = new Sprite[4]; //normal, ready, good, bad
+    public SpriteRenderer[] renderers = new SpriteRenderer[2];
+
+    void Start() {
         rb = GetComponent<Rigidbody2D>();
     }
 
-    void Update()
-    {
+    void Update() {
         input_hor = Input.GetAxisRaw("Horizontal");
-        input_dash = Input.GetKeyDown(KeyCode.Space) || Input.GetKeyDown(KeyCode.LeftShift) || Input.GetKeyDown(KeyCode.RightShift) || Input.GetKeyDown(KeyCode.LeftControl) || Input.GetKeyDown(KeyCode.RightControl);
+        if(Input.GetKeyDown(KeyCode.Z)) {
+            hitTimer = Time.time;
+            foreach(SpriteRenderer r in renderers) {
+                r.sprite = sprites[1];
+            }
+        }
+        if(Time.time % hitTime < 0.1f) {
+            foreach(SpriteRenderer r in renderers) {
+                r.sprite = sprites[0];
+            }
+        }
+
     }
 
 
-    void FixedUpdate()
-    {
+    void FixedUpdate() {
 
-        if (grabbed)
-        {
-            if (Time.time > pauseTimer + pauseTime)
-            {
+        if(grabbed) {
+            if(Time.time > pauseTimer + pauseTime) {
                 Ball.activeBall.rb.isKinematic = false;
                 Ball.activeBall.rb.velocity = throwspeed;
                 grabbed = false;
-                Camera.main.GetComponent<ScreenShake>().Shake(throwspeed.magnitude);
             }
         }
 
@@ -51,33 +61,50 @@ public class Paddle : MonoBehaviour
         rb.velocity = new Vector2(input_hor * (input_dash ? dashDist : movespeed), 0);
     }
 
-    private void OnCollisionEnter2D(Collision2D collision)
-    {
+    private void OnCollisionEnter2D(Collision2D collision) {
         GameObject go = collision.gameObject;
-        if (grabbed)
+        if(grabbed)
             return;
-        if (go.layer == LayerMask.NameToLayer("Ball"))
-        {
+        if(go.layer == LayerMask.NameToLayer("Ball")) {
             Ball b = go.GetComponent<Ball>();
             Rigidbody2D rb = go.GetComponent<Rigidbody2D>();
+
+
+
+
+
+
+
+
+
 
             throwspeed = (rb.velocity.magnitude * new Vector2((transform.position - go.transform.position).normalized.x * -1f, 1)) * hitMultiplier;
             rb.velocity = Vector2.zero;
 
-            if (throwspeed.magnitude >=5)
-            {
+            if(hitTimer + hitTime > Time.time) {
+                throwspeed = throwspeed * hitMultiplier;
+
+                Camera.main.GetComponent<ScreenShake>().Shake(throwspeed.magnitude);
+                foreach(SpriteRenderer r in renderers) {
+                    r.sprite = sprites[2];
+                }
+            } else {
+                foreach(SpriteRenderer r in renderers) {
+                    r.sprite = sprites[3];
+                }
+            }
+
+            if(throwspeed.magnitude >= 5) {
                 AudioPlayer.Instance.PlaySound("Paddle_Hit1", 0.1f);
                 Debug.Log("1");
             }
 
-            if (throwspeed.magnitude >=11)
-            {
+            if(throwspeed.magnitude >= 11) {
                 AudioPlayer.Instance.PlaySound("Paddle_Hit2", 0.1f);
                 Debug.Log("2");
             }
 
-            if (throwspeed.magnitude >= 16)
-            {
+            if(throwspeed.magnitude >= 16) {
                 AudioPlayer.Instance.PlaySound("Paddle_Hit3", 0.1f);
                 Debug.Log("3");
             }
