@@ -89,7 +89,7 @@ public class Hand : MonoBehaviour {
         }
 
 
-        if(currentHP < 2 && Time.time % 1 < 0.2f) {
+        if(currentHP < 2 && Time.time % 1f < 0.01f) {
             Destroy(Instantiate(SparkPrefab, transform.position, Quaternion.identity), 10f);
         }
     }
@@ -163,7 +163,7 @@ public class Hand : MonoBehaviour {
         float r = Random.Range(0f, 1f);
         if(r < 0.6f) {
             return 0;
-        }else if(lastType == 2 && r > 0.8) {
+        }else if(lastType == 2 && r > 0.8f) {
             return 1;
         } else {
             return 2;

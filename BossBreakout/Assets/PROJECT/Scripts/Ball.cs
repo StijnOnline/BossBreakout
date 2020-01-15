@@ -18,6 +18,8 @@ public class Ball : MonoBehaviour
     public Sprite[] sprites = new Sprite[5]; //normal,curve, explode 321
     private SpriteRenderer sr;
 
+    private float lastBounce = -100f;
+
     public enum Type {
         Normal,
         Curve,
@@ -60,7 +62,11 @@ public class Ball : MonoBehaviour
     }
 
     private void OnCollisionEnter2D(Collision2D collision) {
-        CountExplosion();
+
+        if (Time.time > lastBounce + 0.05f){
+            CountExplosion();
+            lastBounce = Time.time;
+        }
     }
 
     public void CountExplosion() {
@@ -71,7 +77,7 @@ public class Ball : MonoBehaviour
             if(explodeCount >= 3) {
                 Debug.Log("Boom");
                 Collider2D[] results = new Collider2D[5];
-                Physics2D.OverlapCircle(transform.position, 1f, new ContactFilter2D(), results);
+                Physics2D.OverlapCircle(transform.position, 3f, new ContactFilter2D(), results);
                 foreach(Collider2D item in results) {
                     Block b = item?.GetComponent<Block>();
                     if(b != null) {

@@ -51,7 +51,9 @@ public class Block : MonoBehaviour {
 
         if (invurnerable)
             return;
-            currentHP--;
+
+
+        currentHP--;
 
         if (currentHP <= 0) {
             Boss.activeBoss.LostBlock();
