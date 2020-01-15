@@ -1,6 +1,8 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
+
 
 public class Boss : Block {
 
@@ -23,6 +25,9 @@ public class Boss : Block {
     private float hand1RespawnTimer = 5f;
     private float hand2RespawnTimer = 5f;
     public int stages = 2;
+
+    public GameObject explosionPrefab;
+    public GameObject victoryCanvas;
 
     void Start() {
         activeBoss = this;
@@ -116,7 +121,17 @@ public class Boss : Block {
     }
 
     public override void Destroyed() {
-        gameObject.SetActive(false);
-        //coole death animation
+
+        victoryCanvas.SetActive(true);
+        StartCoroutine(Victory());
+    }
+
+    public IEnumerator Victory() {
+        for(int i = 0; i < 30; i++) {
+            Destroy(Instantiate(explosionPrefab, transform.position + new Vector3(Random.Range(-4f,4f), Random.Range(-4f, 4f),0), Quaternion.identity), 10f);
+            yield return 0;
+        }
+        yield return new WaitForSeconds(2f);
+        SceneManager.LoadScene(0);
     }
 }
