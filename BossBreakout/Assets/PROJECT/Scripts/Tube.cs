@@ -32,7 +32,7 @@ public class Tube : MonoBehaviour
             }
             if(i - j >= 0) {
                 transform.GetChild(i - j).gameObject.SetActive(false);
-                Destroy(Instantiate(ExplosionPrefab, transform.GetChild(i + j).position, Quaternion.identity), 10f);
+                Destroy(Instantiate(ExplosionPrefab, transform.GetChild(i - j).position, Quaternion.identity), 10f);
             }
         }
     }
