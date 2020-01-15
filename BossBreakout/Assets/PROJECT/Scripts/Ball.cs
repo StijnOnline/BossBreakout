@@ -32,6 +32,8 @@ public class Ball : MonoBehaviour
     public float ghostDelay = 0;
     private float ghostDelayTimer = 0;
 
+    public float speedLimitPercentage = 0.8f;
+
     void Start()
     {
         activeBall = this;
@@ -57,7 +59,7 @@ public class Ball : MonoBehaviour
     private void Update() {
 
         ghostDelayTimer -= Time.deltaTime;
-        if(rb.velocity.magnitude > 0.9 * minMaxSpeed.y && ghostDelayTimer < 0) { //DISCUSS is this timer smart?
+        if(rb.velocity.magnitude > speedLimitPercentage * minMaxSpeed.y && ghostDelayTimer < 0) { //DISCUSS is this timer smart?
             ghostDelayTimer = ghostDelay;
             GameObject trail = new GameObject();
             trail.transform.position = (Vector3)(rb.position - rb.velocity * 0.015f);
