@@ -22,8 +22,7 @@ public class Boss : Block {
     public float handRespawnTime = 5f;
     private float hand1RespawnTimer = 5f;
     private float hand2RespawnTimer = 5f;
-
-
+    public int stages = 2;
 
     void Start() {
         activeBoss = this;
@@ -99,12 +98,12 @@ public class Boss : Block {
         Ball.activeBall.gameObject.SetActive(true);
         Ball.activeBall.rb.velocity = Vector2.one * Ball.activeBall.minMaxSpeed.x;
 
-        if(stage == 4) {
+        stage++;
+        if(stage == stages) {
             invurnerable = false;
             forceField.SetActive(false);
         }
 
-        stage++;
         ResetBlocks();
     }
 
