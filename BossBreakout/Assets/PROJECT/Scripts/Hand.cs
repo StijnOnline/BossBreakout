@@ -78,13 +78,18 @@ public class Hand : MonoBehaviour {
 
         if(!grabbed && !broken) {
 
-            float relativepos = Ball.activeBall.transform.position.x - transform.parent.parent.position.x;
-            float targetDir = Mathf.Clamp(relativepos, -1, 1);
-            currentInput = targetDir;
+            if (Ball.activeBall != null)
+            {
+                float relativepos = Ball.activeBall.transform.position.x - transform.parent.parent.position.x;
+                float targetDir = Mathf.Clamp(relativepos, -1, 1);
+                currentInput = targetDir;
 
-            Vector3 newpos = transform.parent.parent.position;
-            newpos.x = Mathf.Clamp(newpos.x + currentInput * movespeed, minMaxPos.x, minMaxPos.y);
-            transform.parent.parent.position = newpos;
+                Vector3 newpos = transform.parent.parent.position;
+                newpos.x = Mathf.Clamp(newpos.x + currentInput * movespeed, minMaxPos.x, minMaxPos.y);
+                transform.parent.parent.position = newpos;
+            }
+           
+
                        
         }
 
