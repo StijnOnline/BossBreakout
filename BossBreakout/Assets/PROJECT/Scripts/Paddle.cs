@@ -78,7 +78,7 @@ public class Paddle : MonoBehaviour {
 
 
 
-            throwspeed = (rb.velocity.magnitude * new Vector2((transform.position - go.transform.position).normalized.x * -1f, 1)) * hitMultiplier;
+            throwspeed = (rb.velocity.magnitude * new Vector2((transform.position - go.transform.position).normalized.x * -1f, 1));
             rb.velocity = Vector2.zero;
 
             if(hitTimer + hitTime > Time.time) {
