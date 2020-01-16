@@ -8816,7 +8816,7 @@ MonoBehaviour:
   handMoveDist: 1
   handRespawnTime: 5
   stages: 2
-  explosionPrefab: {fileID: 1857891198955033041, guid: 3f5e237781d69ef4fb45efe3e4a2e599,
+  explosionPrefab: {fileID: 4005672145266579304, guid: 9211a18b8e7c2c14d97bddb6bcfbe159,
     type: 3}
   victoryCanvas: {fileID: 1933037743}
   game: {fileID: 2021822969}

@@ -104,17 +104,14 @@ public class Paddle : MonoBehaviour {
 
             if(rb.velocity.magnitude >= 5) {
                 AudioPlayer.Instance.PlaySound("Paddle_Hit1", 0.1f);
-                Debug.Log("1");
             }
 
             if(rb.velocity.magnitude >= 11) {
                 AudioPlayer.Instance.PlaySound("Paddle_Hit2", 0.1f);
-                Debug.Log("2");
             }
 
             if(rb.velocity.magnitude >= 16) {
                 AudioPlayer.Instance.PlaySound("Paddle_Hit3", 0.1f);
-                Debug.Log("3");
             }
 
 

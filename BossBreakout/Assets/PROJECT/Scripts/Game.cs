@@ -40,8 +40,7 @@ public class Game : MonoBehaviour
     {
         int Time = PlayerPrefs.GetInt("Time");
         int bestTime = PlayerPrefs.GetInt("BestTime");
-
-        if (Time < bestTime)
+        if (Time < bestTime || bestTime == 0)
         {
             bestTime = Time;
             PlayerPrefs.SetInt("BestTime", bestTime);
@@ -72,7 +71,6 @@ public class Game : MonoBehaviour
 
 
     public void GameOver(GameObject g, Collider2D c) {
-        Debug.Log("GAMEOVER");
         playing = false;
         canvas.SetActive(true);
         SceneManager.LoadScene(0);

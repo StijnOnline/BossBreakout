@@ -92,10 +92,8 @@ public class Ball : MonoBehaviour
     public void CountExplosion() {
         if(type == Type.Explosive) {
             explodeCount++;
-            Debug.Log("Boop" + explodeCount);
 
             if(explodeCount >= 3) {
-                Debug.Log("Boom");
                 Collider2D[] results = new Collider2D[5];
                 Physics2D.OverlapCircle(transform.position, 3f, new ContactFilter2D(), results);
                 foreach(Collider2D item in results) {

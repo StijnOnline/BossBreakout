@@ -73,14 +73,10 @@ public class Boss : Block {
 
 
     public void LostBlock() {
-        Debug.Log("OOF LOST A BLOCK");
+
     }
 
     public void LostTube(bool leftside) {
-        
-        
-
-        Debug.Log("OOF LOST A 'Tube");
         StartCoroutine(ChangePhase(leftside));
     }
 
