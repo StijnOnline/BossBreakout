@@ -29,6 +29,8 @@ public class Boss : Block {
     public GameObject explosionPrefab;
     public GameObject victoryCanvas;
 
+    public Game game; 
+
     void Start() {
         activeBoss = this;
         invurnerable = true;
@@ -124,6 +126,8 @@ public class Boss : Block {
 
         victoryCanvas.SetActive(true);
         StartCoroutine(Victory());
+        game.Victory();
+
     }
 
     public IEnumerator Victory() {
@@ -131,7 +135,7 @@ public class Boss : Block {
             Destroy(Instantiate(explosionPrefab, transform.position + new Vector3(Random.Range(-4f,4f), Random.Range(-4f, 4f),0), Quaternion.identity), 10f);
             yield return 0;
         }
-        yield return new WaitForSeconds(2f);
+        yield return new WaitForSeconds(6f);
         SceneManager.LoadScene(0);
     }
 }
